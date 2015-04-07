@@ -450,8 +450,10 @@
 
 - (void)deselectRowForItem:(id)item animated:(BOOL)animated
 {
-  NSIndexPath *indexPath = [self indexPathForItem:item];
-  [self.tableView deselectRowAtIndexPath:indexPath animated:animated];
+  if ([self isCellForItemExpanded:[self parentForItem:item]]) {
+    NSIndexPath *indexPath = [self indexPathForItem:item];
+    [self.tableView deselectRowAtIndexPath:indexPath animated:animated];
+  }
 }
 
 - (BOOL)allowsSelection
